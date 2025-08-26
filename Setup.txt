@@ -1,0 +1,124 @@
+Alumni Atlas — Setup Guide
+
+This guide explains how to get the project running locally.
+
+============================================================
+1) Overview
+============================================================
+Frontend: React + TypeScript + Vite (dev server on http://localhost:5173)
+Backend: Python (standard library HTTP server) + SQLite (on http://localhost:8002)
+Data: stored in project/backend/alumni.db (created automatically if not present)
+Admin: DBMS web console is served by the backend (http://localhost:8002/)
+
+============================================================
+2) Prerequisites
+============================================================
+Node.js 18+ (https://nodejs.org)
+npm 9+ (bundled with Node.js)
+Python 3.8+ (https://www.python.org)
+Git (optional, for cloning)
+
+============================================================
+3) Quick Start — Windows (cmd.exe)
+============================================================
+A. Start the backend
+From the repo root:
+  cd project
+  python backend\dbms_interface.py 8002
+  (You can omit "8002" to use the default. Leave this terminal running.)
+
+B. Start the frontend (new terminal)
+From the repo root:
+  cd project
+  npm install
+  npm run dev
+
+C. Open the app
+Frontend: http://localhost:5173
+Backend Admin Console (DBMS UI): http://localhost:8002/
+
+Notes
+Run the backend before the frontend.
+
+============================================================
+4) Quick Start — macOS/Linux
+============================================================
+A. Start the backend
+From the repo root:
+  cd project
+  python3 backend/dbms_interface.py 8002
+  (Or omit the port to use the default. Keep it running.)
+
+B. Start the frontend (new terminal)
+From the repo root:
+  cd project
+  npm install
+  npm run dev
+
+C. Open the app
+Frontend: http://localhost:5173
+Backend Admin Console: http://localhost:8002/
+
+============================================================
+5) Configuration
+============================================================
+Backend Port
+Default: 8002. You can pass a port as the first CLI argument when starting the backend (e.g., python backend\\dbms_interface.py 8002).
+
+============================================================
+6) Project Structure (key parts)
+============================================================
+repo-root/
+  readme.md
+  Setup.txt
+  project/
+    backend/
+      dbms_interface.py   (Python server + DBMS UI)
+      alumni.db           (SQLite database)
+      start-dbms.bat / stop-dbms.bat (Windows helpers)
+    src/
+      components/         (UI components incl. Globe, FilterPanel)
+      context/            (AlumniContext: data & filters)
+      services/           (api.ts: REST client)
+      types/              (TypeScript types)
+    package.json          (frontend scripts/deps)
+    vite.config.ts        (Vite config)
+
+============================================================
+7) Database & Admin Console
+============================================================
+SQLite DB file: project/backend/alumni.db
+To reset demo data: stop the backend and delete alumni.db; it will be recreated on next start.
+Admin (DBMS) UI: http://localhost:8002/ (view/inspect, moderation helpers)
+
+============================================================
+8) Filters (what users can do)
+============================================================
+Search: filters by Name or Company (case-insensitive substring)
+Program: exact match from available programs
+Graduation Year: exact match (options show newest first)
+Country: exact match from last segment of the Location field (e.g., "City, Country" → Country)
+Panel actions: Apply (apply filters) / Clear (reset all)
+
+============================================================
+9) Troubleshooting
+============================================================
+Port already in use:
+  Choose a different port for the backend (e.g., 8010) and ensure the frontend points to it.
+Network errors in the frontend:
+  Make sure the backend is running and reachable at the expected URL.
+Python not found:
+  Ensure Python is installed and on PATH. Try "py -3 --version" on Windows or use "python3" on macOS/Linux.
+Blank globe / no markers:
+  Check the browser console for errors. Confirm /alumni returns data at http://localhost:8002/alumni.
+
+============================================================
+10) API Overview (used by the frontend)
+============================================================
+GET    /alumni           → list all alumni
+POST   /alumni           → create a new alumni record
+DELETE /alumni/:id       → delete an alumni record
+POST   /join             → submit a join request (enters moderation queue)
+
+Data model (simplified):
+  id, name, program, graduationYear, jobTitle, company, location, email, linkedin (optional), twitter (optional), latitude, longitude

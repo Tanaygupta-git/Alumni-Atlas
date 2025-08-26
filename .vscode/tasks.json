@@ -1,0 +1,49 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Backend Server",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "backend/dbms_interface.py",
+        "8002"
+      ],
+      "group": "build",
+      "isBackground": true,
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/project"
+      }
+    },
+    {
+      "label": "Stop Backend Server",
+      "type": "shell",
+      "command": "backend/stop-dbms.bat",
+      "args": [
+        "8002"
+      ],
+      "group": "build",
+      "isBackground": false,
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/project"
+      }
+    },
+    {
+      "label": "Start Frontend Server",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "dev"
+      ],
+      "group": "build",
+      "isBackground": true,
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/project"
+      }
+    }
+  ]
+}
