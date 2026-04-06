@@ -70,4 +70,12 @@ Alumni Atlas is ideal for showcasing modern web/database integration and can be 
 
 - Geocoding: Location coordinates are estimated for demo purposes.
 - Database: SQLite is used for simplicity; switch to PostgreSQL/MySQL for larger deployments.
-- Cross-Origin Resource Sharing (CORS): Dev setup expects frontend at 5173 and backend at 8002.
+- Cross-Origin Resource Sharing (CORS): Dev setup expects frontend at 51<img width="1914" height="1009" alt="Screenshot 2026-04-06 103510" src="https://github.com/user-attachments/assets/e1ab3288-13d3-4a69-ab4a-a3f776c93e69" />
+73 and backend at 8002.
+
+
+
+![Uploading Screenshot 2026-04-06 103510.png…]()
+<img width="1902" height="1027" alt="Screenshot 2026-04-06 103543" src="https://github.com/user-attachments/assets/649b0c55-21af-47e5-a4b6-55ddf8071ef9" />
+
+  
